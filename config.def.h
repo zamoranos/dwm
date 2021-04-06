@@ -65,7 +65,7 @@ static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ 0,	                        XK_Print   spawn,          SHCMD("scrot -q 100") },
+	{ 0,	                        XK_Print,  spawn,          SHCMD("scrot -q 100") },
 	{ MODKEY,                       XK_x,      spawn,          SHCMD("sysact") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,	                XK_Return, spawn,          {.v = termcmd } },
