@@ -61,6 +61,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
+#include <X11/XF86keysym.h>
 #include "shiftview.c"
 
 static Key keys[] = {
@@ -68,6 +69,14 @@ static Key keys[] = {
 	{ 0,	                        XK_Print,  spawn,          SHCMD("scrot -q 100") },
 	{ MODKEY,                       XK_x,      spawn,          SHCMD("sysact") },
 	{ MODKEY,                       XK_w,      spawn,          SHCMD("$BROWSER") },
+	{ 0,	                        XF86XK_AudioMute,      	      spawn,          SHCMD("pkill -SIGUSR1 dwmblocks") },
+	{ 0,	                        XF86XK_AudioRaiseVolume,      spawn,          SHCMD("pkill -SIGUSR1 dwmblocks") },
+	{ 0,	                        XF86XK_AudioLowerVolume,      spawn,          SHCMD("pkill -SIGUSR1 dwmblocks") },
+	{ MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("sndioctl output.mute=!; pkill -SIGUSR1 dwmblocks") },
+	{ MODKEY,                       XK_equal,  spawn,          SHCMD("sndioctl output.level=+0.05; pkill -SIGUSR1 dwmblocks") },
+	{ MODKEY|ShiftMask,             XK_equal,  spawn,          SHCMD("sndioctl output.level=+0.15; pkill -SIGUSR1 dwmblocks") },
+	{ MODKEY,                       XK_minus,  spawn,          SHCMD("sndioctl output.level=-0.05; pkill -SIGUSR1 dwmblocks") },
+	{ MODKEY|ShiftMask,             XK_minus,  spawn,          SHCMD("sndioctl output.level=-0.15; pkill -SIGUSR1 dwmblocks") },
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,	                XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -88,9 +97,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
-	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
+	{ MODKEY,                       XK_bracketleft,  setgaps,        {.i = -1 } },
+	{ MODKEY,                       XK_bracketright,  setgaps,        {.i = +1 } },
+	{ MODKEY,	                XK_a,      setgaps,        {.i = 0  } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY, 	                XK_g, 	   shiftview,      {.i = -1 } },
