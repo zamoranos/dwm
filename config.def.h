@@ -77,6 +77,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_equal,  spawn,          SHCMD("sndioctl output.level=+0.15; pkill -SIGUSR1 dwmblocks") },
 	{ MODKEY,                       XK_minus,  spawn,          SHCMD("sndioctl output.level=-0.05; pkill -SIGUSR1 dwmblocks") },
 	{ MODKEY|ShiftMask,             XK_minus,  spawn,          SHCMD("sndioctl output.level=-0.15; pkill -SIGUSR1 dwmblocks") },
+	{ MODKEY,                       XK_F11,    spawn,          SHCMD("ffplay -f v4l2 -noborder -video_size 320x240 -i /dev/video0") },
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,	                XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
